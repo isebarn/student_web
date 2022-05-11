@@ -2,15 +2,13 @@
   <v-app dark>
     <v-navigation-drawer
       v-if="$auth.loggedIn"
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
+      clipped
       fixed
       app
     >
       <v-list>
         <v-list-item
-          v-for="(item, i) in items"
+          v-for="(item, i) in available_items"
           :key="i"
           :to="item.to"
           router
@@ -40,9 +38,20 @@ export default {
     return {
       god: false,
       items: [
-        { title: 'Personal Data', to: 'student_personal_data' },
-        { title: 'Programs', to: 'new_program' }
+        { title: 'Personal Data', to: 'student_personal_data', precedence: 4 },
+        { title: 'Programs', to: 'new_program', precedence: 2 },
+        { title: 'Users', to: 'users', precedence: 2 }
       ]
+    }
+  },
+
+  computed: {
+    precedence () {
+      return Math.min(...this.$auth.user.groups.map(x => x.precedence))
+    },
+
+    available_items () {
+      return this.items.filter(x => this.precedence <= x.precedence)
     }
   }
 }
