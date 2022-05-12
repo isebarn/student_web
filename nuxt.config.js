@@ -53,7 +53,7 @@ export default {
         endpoints: {
           login: { url: 'aws_cognito/access/login', method: 'post', propertyName: "AccessToken"},
           user: { url: "aws_cognito/access/user", method: 'get', propertyName: ""},
-          logout: false
+          logout: true
         }
       }
     },

@@ -22,6 +22,13 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+      <template #append>
+        <div class="pa-2">
+          <v-btn block @click="$auth.logout()">
+            Logout
+          </v-btn>
+        </div>
+      </template>
     </v-navigation-drawer>
     <v-main>
       <v-container>
@@ -40,6 +47,9 @@ export default {
       items: [
         { title: 'Personal Data', to: 'student_personal_data', precedence: 4 },
         { title: 'Programs', to: 'new_program', precedence: 2 },
+        { title: 'Airport', to: 'airport_code', precedence: 2 },
+        { title: 'Host family', to: 'host_family', precedence: 2 },
+        { title: 'Account', to: 'account', precedence: 2 },
         { title: 'Users', to: 'users', precedence: 2 }
       ]
     }

@@ -40,6 +40,51 @@
       </v-row>
       <v-row>
         <v-col>
+          <v-select v-model="host_family" :items="host_families" label="Host Family">
+            <template #selection="{item}">
+              {{ item.number }} - {{ item.first_name }} {{ item.last_name }} ({{ item.email }})
+            </template>
+            <template #item="{item}">
+              <v-list>
+                <v-list-item three-line>
+                  <v-list-item-content>
+                    <v-list-item-title>{{ item.number }}</v-list-item-title>
+                    <v-list-item-subtitle>
+                      {{ item.first_name }} {{ item.last_name }}
+                    </v-list-item-subtitle>
+                    <v-list-item-subtitle>
+                      {{ item.email }}
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </template>
+          </v-select>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-select v-model="airport" :items="airports" label="Airport">
+            <template #selection="{item}">
+              {{ item.code }} - {{ item.airport }}
+            </template>
+            <template #item="{item}">
+              <v-list>
+                <v-list-item three-line>
+                  <v-list-item-content>
+                    <v-list-item-title>{{ item.code }}</v-list-item-title>
+                    <v-list-item-subtitle>
+                      {{ item.airport }}
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </template>
+          </v-select>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
           <datePick ref="application_date_picker" label="Date of Application " />
         </v-col>
       </v-row>
@@ -117,7 +162,9 @@ export default {
       first_name: '',
       last_name: '',
       gender: '',
-      program: '',
+      program: null,
+      airport: null,
+      host_family: null,
       address_line_1: '',
       address_line_2: '',
       address_city: '',
@@ -129,12 +176,16 @@ export default {
       school_name: '',
       school_type: '',
       average_grades: '',
-      programmes: []
+      programmes: [],
+      airports: [],
+      host_families: []
     }
   },
 
   async fetch () {
     this.programmes = await this.$axios.$get('api/program')
+    this.airports = await this.$axios.$get('api/airport_code')
+    this.host_families = await this.$axios.$get('api/host_family')
   },
 
   methods: {
@@ -145,6 +196,8 @@ export default {
         last_name: this.last_name,
         gender: this.gender,
         program: this.program,
+        airport: this.airport,
+        host_family: this.host_family,
         date_of_application: this.$refs.application_date_picker.date,
         date_of_birth: this.$refs.dob_picker.date,
         address_line_1: this.address_line_1,
@@ -168,6 +221,8 @@ export default {
       this.last_name = ''
       this.gender = ''
       this.program = ''
+      this.airport = ''
+      this.host_family = ''
       this.address_line_1 = ''
       this.address_line_2 = ''
       this.address_city = ''
