@@ -28,37 +28,72 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field v-model="deposit_prog" append-icon="mdi-currency-eur" label="Deposit prog" />
+            <v-text-field-money
+              v-model="deposit_prog"
+              :properties="moneyProperties"
+              :options="moneyOptions"
+              label="Deposit prog"
+            />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field v-model="second_installment" append-icon="mdi-currency-eur" label="Second Installment" />
+            <v-text-field-money
+              v-model="second_installment"
+              :properties="moneyProperties"
+              :options="moneyOptions"
+              label="Second Installment"
+            />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field v-model="third_installment" append-icon="mdi-currency-eur" label="Third Installment" />
+            <v-text-field-money
+              v-model="third_installment"
+              :properties="moneyProperties"
+              :options="moneyOptions"
+              label="Third Installment"
+            />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field v-model="final_installment" append-icon="mdi-currency-eur" label="Final Installment" />
+            <v-text-field-money
+              v-model="final_installment"
+              :properties="moneyProperties"
+              :options="moneyOptions"
+              label="Final Installment"
+            />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field v-model="total_prog" append-icon="mdi-currency-eur" label="Total Prog" />
+            <v-text-field-money
+              v-model="total_prog"
+              :properties="moneyProperties"
+              :options="moneyOptions"
+              label="Total Prog"
+            />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field v-model="credit_1" append-icon="mdi-currency-eur" label="Credit 1" />
+            <v-text-field-money
+              v-model="credit_1"
+              :properties="moneyProperties"
+              :options="moneyOptions"
+              label="Credit 1"
+            />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field v-model="credit_2" append-icon="mdi-currency-eur" label="Credit 2" />
+            <v-text-field-money
+              v-model="credit_2"
+              :properties="moneyProperties"
+              :options="moneyOptions"
+              label="Credit 2"
+            />
           </v-col>
         </v-row>
         <v-row>
@@ -72,27 +107,52 @@
 
         <v-row>
           <v-col>
-            <v-text-field v-model="deposit_paid" append-icon="mdi-currency-eur" label="Deposit Paid" />
+            <v-text-field-money
+              v-model="deposit_paid"
+              :properties="moneyProperties"
+              :options="moneyOptions"
+              label="Deposit Paid"
+            />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field v-model="second_installment_paid" append-icon="mdi-currency-eur" label="Second Installment Paid" />
+            <v-text-field-money
+              v-model="second_installment_paid"
+              :properties="moneyProperties"
+              :options="moneyOptions"
+              label="Second Installment Paid"
+            />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field v-model="third_installment_paid" append-icon="mdi-currency-eur" label="Third Installment Paid" />
+            <v-text-field-money
+              v-model="third_installment_paid"
+              :properties="moneyProperties"
+              :options="moneyOptions"
+              label="Third Installment Paid"
+            />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field v-model="final_installment_paid" append-icon="mdi-currency-eur" label="Final Installment Paid" />
+            <v-text-field-money
+              v-model="final_installment_paid"
+              :properties="moneyProperties"
+              :options="moneyOptions"
+              label="Final Installment Paid"
+            />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field v-model="balance_owed" append-icon="mdi-currency-eur" label="Balance owed" />
+            <v-text-field-money
+              v-model="balance_owed"
+              :properties="moneyProperties"
+              :options="moneyOptions"
+              label="Balance owed"
+            />
           </v-col>
         </v-row>
 
@@ -128,7 +188,22 @@ export default {
       third_installment_paid: '',
       final_installment_paid: '',
       balance_owed: '',
-      programmes: []
+      programmes: [],
+      moneyProperties: {
+        prefix: '€',
+        readonly: false,
+        disabled: false,
+        outlined: false,
+        clearable: true,
+        placeholder: '#####'
+      },
+      moneyOptions: {
+        locale: 'pt-BR',
+        length: 5,
+        precision: 1,
+        empty: null
+
+      }
     }
   },
 
@@ -138,7 +213,6 @@ export default {
 
   methods: {
     async submit () {
-      console.log(this.$refs.application_date_picker.date)
       await this.$axios.$post('api/account', {
         program: this.program,
         deposit_prog: this.deposit_prog,

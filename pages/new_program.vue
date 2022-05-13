@@ -4,7 +4,7 @@
       <v-text-field v-model="country" label="Country" />
       <v-text-field v-model="description" label="Description" />
       <v-text-field v-model="code" label="Program Code" />
-      <v-text-field v-model="program_price" label="Program Price" />
+      <v-text-field-money v-model="program_price" :properties="moneyProperties" :options="moneyOptions" label="Program Price" />
       <v-text-field v-model="price" label="Price" />
       <v-btn @click="submit">
         Submit
@@ -26,7 +26,22 @@ export default {
       description: '',
       code: '',
       program_price: '',
-      price: ''
+      price: '',
+      moneyProperties: {
+        prefix: '€',
+        readonly: false,
+        disabled: false,
+        outlined: false,
+        clearable: true,
+        placeholder: '#####'
+      },
+      moneyOptions: {
+        locale: 'pt-BR',
+        length: 5,
+        precision: 1,
+        empty: null
+
+      }
     }
   },
 
