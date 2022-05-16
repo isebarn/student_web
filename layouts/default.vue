@@ -5,6 +5,7 @@
       clipped
       fixed
       app
+      style="background-color: #E8F4EA;"
     >
       <v-list>
         <v-list-item
@@ -24,14 +25,14 @@
       </v-list>
       <template #append>
         <div class="pa-2">
-          <v-btn block @click="$auth.logout()">
+          <v-btn block style="background-color: #E1EBED" @click="$auth.logout()">
             Logout
           </v-btn>
         </div>
       </template>
     </v-navigation-drawer>
-    <v-main>
-      <v-container>
+    <v-main style="background-color: #FCFDFC;">
+      <v-container style="background-color: #FCFDFC;">
         <Nuxt />
       </v-container>
     </v-main>

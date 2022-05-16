@@ -50,23 +50,7 @@
       </v-row>
       <v-row>
         <v-col>
-          <v-select v-model="airport" :items="airports" label="Airport">
-            <template #selection="{item}">
-              {{ item.code }} - {{ item.airport }}
-            </template>
-            <template #item="{item}">
-              <v-list>
-                <v-list-item three-line>
-                  <v-list-item-content>
-                    <v-list-item-title>{{ item.code }}</v-list-item-title>
-                    <v-list-item-subtitle>
-                      {{ item.airport }}
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </template>
-          </v-select>
+          <airport v-model="airport" />
         </v-col>
       </v-row>
       <v-row>
@@ -85,10 +69,10 @@
 </template>
 
 <script>
-
+import airport from '../components/airport'
 export default {
   name: 'HostFamily',
-
+  components: { airport },
   data () {
     return {
       number: '',

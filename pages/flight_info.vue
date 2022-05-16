@@ -3,23 +3,7 @@
     <v-container>
       <v-row>
         <v-col>
-          <v-select v-model="airport" :items="airports" label="Airport">
-            <template #selection="{item}">
-              {{ item.code }} - {{ item.airport }}
-            </template>
-            <template #item="{item}">
-              <v-list>
-                <v-list-item three-line>
-                  <v-list-item-content>
-                    <v-list-item-title>{{ item.code }}</v-list-item-title>
-                    <v-list-item-subtitle>
-                      {{ item.airport }}
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </template>
-          </v-select>
+          <airport v-model="airport" />
         </v-col>
       </v-row>
       <v-row>
@@ -74,10 +58,11 @@
 
 <script>
 import datePick from '../components/datePick'
+import airport from '../components/airport'
 export default {
   name: 'FlightInfo',
 
-  components: { datePick },
+  components: { datePick, airport },
 
   data () {
     return {
@@ -91,7 +76,6 @@ export default {
       return_flight_number: '',
       return_airline: '',
       airports: []
-
     }
   },
 
@@ -100,6 +84,11 @@ export default {
   },
 
   methods: {
+
+    onFilterAirport (item, queryText, itemText) {
+      return item.code.toLocaleLowerCase().includes(queryText.toLocaleLowerCase()) || item.airport.toLocaleLowerCase().includes(queryText.toLocaleLowerCase())
+    },
+
     async submit () {
       await this.$axios.$post('api/flight_info', {
         airport: this.airport,

@@ -4,7 +4,7 @@
       <v-text-field v-model="country" label="Country" />
       <v-text-field v-model="description" label="Description" />
       <v-text-field v-model="code" label="Program Code" />
-      <v-text-field-money v-model="program_price" :properties="moneyProperties" :options="moneyOptions" label="Program Price" />
+      <money ref="program_price" v-model="program_price" label="Program Price" />
       <v-text-field v-model="price" label="Price" />
       <v-btn @click="submit">
         Submit
@@ -17,31 +17,17 @@
 </template>
 
 <script>
+import money from '../components/money'
 export default {
   name: 'NewProgram',
-
+  components: { money },
   data () {
     return {
       country: '',
       description: '',
       code: '',
-      program_price: '',
-      price: '',
-      moneyProperties: {
-        prefix: '€',
-        readonly: false,
-        disabled: false,
-        outlined: false,
-        clearable: true,
-        placeholder: '#####'
-      },
-      moneyOptions: {
-        locale: 'pt-BR',
-        length: 5,
-        precision: 1,
-        empty: null
-
-      }
+      program_price: null,
+      price: ''
     }
   },
 
@@ -62,7 +48,7 @@ export default {
       this.country = ''
       this.description = ''
       this.code = ''
-      this.program_price = ''
+      this.$ref.program_price.money = ''
       this.price = ''
     }
   }

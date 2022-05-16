@@ -4,94 +4,68 @@
       <v-card flat>
         <v-row>
           <v-col>
-            <v-select v-model="program" :items="programmes" label="Program">
-              <template #selection="{item}">
-                {{ item.code }} - {{ item.description }} - {{ item.country }}
-              </template>
-              <template #item="{item}">
-                <v-list>
-                  <v-list-item three-line>
-                    <v-list-item-content>
-                      <v-list-item-title>{{ item.code }}</v-list-item-title>
-                      <v-list-item-subtitle>
-                        {{ item.description }} - {{ item.price }}
-                      </v-list-item-subtitle>
-                      <v-list-item-subtitle>
-                        {{ item.country }}
-                      </v-list-item-subtitle>
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list>
-              </template>
-            </v-select>
+            <program ref="program" v-model="program" />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field-money
+            <money
+              ref="deposit_prog"
               v-model="deposit_prog"
-              :properties="moneyProperties"
-              :options="moneyOptions"
               label="Deposit prog"
             />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field-money
+            <money
+              ref="second_installment"
               v-model="second_installment"
-              :properties="moneyProperties"
-              :options="moneyOptions"
               label="Second Installment"
             />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field-money
+            <money
+              ref="third_installment"
               v-model="third_installment"
-              :properties="moneyProperties"
-              :options="moneyOptions"
               label="Third Installment"
             />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field-money
+            <money
+              ref="final_installment"
               v-model="final_installment"
-              :properties="moneyProperties"
-              :options="moneyOptions"
               label="Final Installment"
             />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field-money
+            <money
+              ref="total_prog"
               v-model="total_prog"
-              :properties="moneyProperties"
-              :options="moneyOptions"
               label="Total Prog"
             />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field-money
+            <money
+              ref="credit_1"
               v-model="credit_1"
-              :properties="moneyProperties"
-              :options="moneyOptions"
               label="Credit 1"
             />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field-money
+            <money
+              ref="credit_2"
               v-model="credit_2"
-              :properties="moneyProperties"
-              :options="moneyOptions"
               label="Credit 2"
             />
           </v-col>
@@ -107,50 +81,45 @@
 
         <v-row>
           <v-col>
-            <v-text-field-money
+            <money
+              ref="deposit_paid"
               v-model="deposit_paid"
-              :properties="moneyProperties"
-              :options="moneyOptions"
               label="Deposit Paid"
             />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field-money
+            <money
+              ref="second_installment_paid"
               v-model="second_installment_paid"
-              :properties="moneyProperties"
-              :options="moneyOptions"
               label="Second Installment Paid"
             />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field-money
+            <money
+              ref="third_installment_paid"
               v-model="third_installment_paid"
-              :properties="moneyProperties"
-              :options="moneyOptions"
               label="Third Installment Paid"
             />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field-money
+            <money
+              ref="final_installment_paid"
               v-model="final_installment_paid"
-              :properties="moneyProperties"
-              :options="moneyOptions"
               label="Final Installment Paid"
             />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field-money
+            <money
+              ref="balance_owed"
               v-model="balance_owed"
-              :properties="moneyProperties"
-              :options="moneyOptions"
               label="Balance owed"
             />
           </v-col>
@@ -168,47 +137,28 @@
 </template>
 
 <script>
-
+import money from '../components/money'
+import program from '../components/program'
 export default {
   name: 'AccountData',
-
+  components: { money, program },
   data () {
     return {
       program: null,
-      deposit_prog: '',
-      second_installment: '',
-      third_installment: '',
-      final_installment: '',
-      total_prog: '',
-      credit_1: '',
-      credit_2: '',
+      deposit_prog: null,
+      second_installment: null,
+      third_installment: null,
+      final_installment: null,
+      total_prog: null,
+      credit_1: null,
+      credit_2: null,
       formula: '',
-      deposit_paid: '',
-      second_installment_paid: '',
-      third_installment_paid: '',
-      final_installment_paid: '',
-      balance_owed: '',
-      programmes: [],
-      moneyProperties: {
-        prefix: '€',
-        readonly: false,
-        disabled: false,
-        outlined: false,
-        clearable: true,
-        placeholder: '#####'
-      },
-      moneyOptions: {
-        locale: 'pt-BR',
-        length: 5,
-        precision: 1,
-        empty: null
-
-      }
+      deposit_paid: null,
+      second_installment_paid: null,
+      third_installment_paid: null,
+      final_installment_paid: null,
+      balance_owed: null
     }
-  },
-
-  async fetch () {
-    this.programmes = await this.$axios.$get('api/program')
   },
 
   methods: {
@@ -234,20 +184,20 @@ export default {
     },
 
     clear () {
-      this.program = null
-      this.deposit_prog = ''
-      this.second_installment = ''
-      this.third_installment = ''
-      this.final_installment = ''
-      this.total_prog = ''
-      this.credit_1 = ''
-      this.credit_2 = ''
+      this.$refs.program.program = null
+      this.$refs.deposit_prog.money = null
+      this.$refs.second_installment.money = null
+      this.$refs.third_installment.money = null
+      this.$refs.final_installment.money = null
+      this.$refs.total_prog.money = null
+      this.$refs.credit_1.money = null
+      this.$refs.credit_2.money = null
       this.formula = ''
-      this.deposit_paid = ''
-      this.second_installment_paid = ''
-      this.third_installment_paid = ''
-      this.final_installment_paid = ''
-      this.balance_owed = ''
+      this.$refs.deposit_paid.money = null
+      this.$refs.second_installment_paid.money = null
+      this.$refs.third_installment_paid.money = null
+      this.$refs.final_installment_paid.money = null
+      this.$refs.balance_owed.money = null
     }
   }
 }
