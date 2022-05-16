@@ -16,6 +16,11 @@
       </v-row>
       <v-row>
         <v-col>
+          <v-text-field v-model="email" label="Email" append-icon="mdi-email" />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
           <v-select v-model="program" :items="programmes" label="Program">
             <template #selection="{item}">
               {{ item.code }} - {{ item.description }} - {{ item.country }}
@@ -147,6 +152,7 @@ export default {
       first_name: '',
       last_name: '',
       gender: '',
+      email: '',
       program: null,
       airport: null,
       host_family: null,
@@ -179,6 +185,7 @@ export default {
         first_name: this.first_name,
         last_name: this.last_name,
         gender: this.gender,
+        email: this.email,
         program: this.program,
         airport: this.airport,
         host_family: this.host_family,
@@ -204,6 +211,7 @@ export default {
       this.first_name = ''
       this.last_name = ''
       this.gender = ''
+      this.email = ''
       this.program = ''
       this.airport = ''
       this.host_family = ''

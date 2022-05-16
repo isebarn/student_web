@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="!$auth.loggedIn">
     <v-row align="center" justify="center">
       <v-card cols="6" style="width: 500px;">
         <v-card-title class="headline justify-center">
@@ -18,7 +18,7 @@
 <script>
 import login from '~/components/login'
 export default {
-  name: 'LoginPage',
+  name: 'HomePage',
   components: {
     login
   }
