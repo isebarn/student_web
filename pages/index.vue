@@ -99,16 +99,13 @@
         <v-col>
           <v-text-field v-model="address_postal_code" label="Postal code" />
         </v-col>
-        <v-col>
-          <v-text-field v-model="address_country" label="Country" />
-        </v-col>
       </v-row>
       <v-row>
-        <v-col>
-          <v-text-field v-model="phone_extension" label="Extension" />
+        <v-col cols="3">
+          <phone ref="phone_extension" v-model="phone_extension" />
         </v-col>
-        <v-col>
-          <v-text-field v-model="phone_number" label="Phone Number" />
+        <v-col cols="9">
+          <v-text-field v-model="phone_number" />
         </v-col>
       </v-row>
       <v-row>
@@ -140,12 +137,14 @@
 </template>
 
 <script>
+
 import datePick from '../components/datePick'
 import airport from '../components/airport'
+import phone from '../components/phone'
 
 export default {
   name: 'StudentPersonalData',
-  components: { datePick, airport },
+  components: { datePick, airport, phone },
 
   data () {
     return {
@@ -161,7 +160,7 @@ export default {
       address_city: '',
       address_postal_code: '',
       address_country: '',
-      phone_extension: '',
+      phone_extension: null,
       phone_number: '',
       nationality: '',
       school_name: '',
@@ -187,7 +186,7 @@ export default {
         gender: this.gender,
         email: this.email,
         program: this.program,
-        airport: this.airport,
+        airport_code: this.airport,
         host_family: this.host_family,
         date_of_application: this.$refs.application_date_picker.date,
         date_of_birth: this.$refs.dob_picker.date,
@@ -220,7 +219,6 @@ export default {
       this.address_city = ''
       this.address_postal_code = ''
       this.address_country = ''
-      this.phone_extension = ''
       this.phone_number = ''
       this.$refs.application_date_picker.date = null
       this.$refs.dob_picker.date = null
