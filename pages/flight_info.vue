@@ -80,7 +80,7 @@ export default {
   },
 
   async fetch () {
-    this.airports = await this.$axios.$get('api/airport_code')
+    this.airports = await this.$axios.$get('api/airport')
   },
 
   methods: {

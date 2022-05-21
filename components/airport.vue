@@ -1,7 +1,7 @@
 <template>
-  <v-autocomplete v-model="airport" :filter="onFilterAirport" :items="airports" label="Airport" @change="handleChange">
+  <v-autocomplete v-model="airport" :filter="onFilter" :items="airports" label="Airport" @change="handleChange">
     <template #selection="{item}">
-      {{ item.code }} - {{ item.airport }}
+      {{ item.code }} - {{ item.name }}
     </template>
     <template #item="{item}">
       <v-list>
@@ -9,7 +9,7 @@
           <v-list-item-content>
             <v-list-item-title>{{ item.code }}</v-list-item-title>
             <v-list-item-subtitle>
-              {{ item.airport }}
+              {{ item.name }}
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -30,7 +30,7 @@ export default {
   },
 
   async fetch () {
-    this.airports = await this.$axios.$get('api/airport_code')
+    this.airports = await this.$axios.$get('api/airport')
   },
 
   methods: {
@@ -39,8 +39,8 @@ export default {
       this.$emit('input', this.airport)
     },
 
-    onFilterAirport (item, queryText, itemText) {
-      return item.code.toLocaleLowerCase().includes(queryText.toLocaleLowerCase()) || item.airport.toLocaleLowerCase().includes(queryText.toLocaleLowerCase())
+    onFilter (item, queryText, itemText) {
+      return item.code.toLocaleLowerCase().includes(queryText.toLocaleLowerCase()) || item.name.toLocaleLowerCase().includes(queryText.toLocaleLowerCase())
     }
 
   }

@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  props: ['label'],
+  props: ['value', 'label'],
   data: () => ({
     activePicker: null,
     date: null,
@@ -45,6 +45,7 @@ export default {
   methods: {
     save (date) {
       this.$refs.menu.save(date)
+      this.$emit('input', this.date)
     }
   }
 }

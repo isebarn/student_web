@@ -1,11 +1,25 @@
 <template>
   <v-form>
     <v-container>
-      <v-text-field v-model="country" label="Country" />
-      <v-text-field v-model="description" label="Description" />
-      <v-text-field v-model="code" label="Program Code" />
-      <money ref="program_price" v-model="program_price" label="Program Price" />
-      <v-text-field v-model="price" label="Price" />
+      <v-row>
+        <v-col>
+          <v-text-field v-model="country" label="Country" maxlength="12" />
+        </v-col>
+        <v-col>
+          <v-text-field v-model="code" label="Program Code" maxlength="4" />
+        </v-col>
+        <v-col>
+          <v-text-field v-model="price" label="Price" maxlength="10" />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col><money ref="program_price" v-model="program_price" label="Program Price" /></v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-text-field v-model="description" label="Description" />
+        </v-col>
+      </v-row>
       <v-btn @click="submit">
         Submit
       </v-btn>

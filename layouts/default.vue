@@ -46,12 +46,12 @@ export default {
     return {
       god: false,
       items: [
-        { title: 'Personal Data', to: 'student_personal_data', precedence: 4 },
-        { title: 'Programs', to: 'new_program', precedence: 2 },
-        { title: 'Airport', to: 'airport_code', precedence: 2 },
-        { title: 'Host family', to: 'host_family', precedence: 2 },
+        { title: 'Applications', to: 'applications', precedence: 2 },
         { title: 'Account', to: 'account', precedence: 2 },
+        { title: 'Airport', to: 'airport_code', precedence: 2 },
         { title: 'Flight Info', to: 'flight_info', precedence: 2 },
+        { title: 'Host family', to: 'host_family', precedence: 2 },
+        { title: 'Programs', to: 'new_program', precedence: 2 },
         { title: 'Users', to: 'users', precedence: 2 }
       ]
     }

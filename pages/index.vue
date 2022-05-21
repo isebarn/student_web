@@ -174,7 +174,7 @@ export default {
 
   async fetch () {
     this.programmes = await this.$axios.$get('api/program')
-    this.airports = await this.$axios.$get('api/airport_code')
+    this.airports = await this.$axios.$get('api/airport')
     this.host_families = await this.$axios.$get('api/host_family')
   },
 
@@ -186,7 +186,7 @@ export default {
         gender: this.gender,
         email: this.email,
         program: this.program,
-        airport_code: this.airport,
+        airport: this.airport,
         host_family: this.host_family,
         date_of_application: this.$refs.application_date_picker.date,
         date_of_birth: this.$refs.dob_picker.date,

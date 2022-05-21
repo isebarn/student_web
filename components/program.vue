@@ -1,7 +1,7 @@
 <template>
   <v-autocomplete v-model="program" :filter="onFilter" :items="programmes" label="Program" @change="handleChange">
     <template #selection="{item}">
-      {{ item.code }} - {{ item.description }} - {{ item.country }}
+      {{ item.code }} - {{ item.description }} - € {{ item.price }} - {{ item.country }}
     </template>
     <template #item="{item}">
       <v-list>
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: 'ProgramSelect',
+  name: 'ProgramAutocomplete',
   prop: ['value'],
 
   data () {

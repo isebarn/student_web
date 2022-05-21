@@ -15,7 +15,7 @@ export default {
   props: {
     length: {
       type: Number,
-      default: 9
+      default: 10
     },
     value: Number,
     label: String
@@ -24,7 +24,7 @@ export default {
     return {
       money: null,
       moneyProperties: {
-        prefix: '€',
+        prefix: '',
         readonly: false,
         disabled: false,
         outlined: false,
@@ -34,7 +34,7 @@ export default {
       moneyOptions: {
         locale: 'pt-BR',
         length: this.length,
-        precision: 1,
+        precision: 0,
         empty: null
 
       }
