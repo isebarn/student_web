@@ -25,11 +25,11 @@
           <program ref="program" v-model="data.program" />
         </v-col>
       </v-row>
-      <!--       <v-row>
+      <v-row>
         <v-col>
           <v-select ref="host_family" v-model="data.host_family" :items="host_family_list" label="Host Family">
             <template #selection="{item}">
-              {{ item.number }} - {{ item.first_name }} {{ item.last_name }} ({{ item.email }})
+              {{ item.number }} - {{ item.father_first_name }} {{ item.father_last_name }} / {{ item.mother_first_name }} {{ item.mother_last_name }}
             </template>
             <template #item="{item}">
               <v-list>
@@ -37,10 +37,10 @@
                   <v-list-item-content>
                     <v-list-item-title>{{ item.number }}</v-list-item-title>
                     <v-list-item-subtitle>
-                      {{ item.first_name }} {{ item.last_name }}
+                      {{ item.father_first_name }} {{ item.father_last_name }} ({{ item.father_email }})
                     </v-list-item-subtitle>
                     <v-list-item-subtitle>
-                      {{ item.email }}
+                      {{ item.mother_first_name }} {{ item.mother_last_name }} ({{ item.mother_email }})
                     </v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
@@ -48,7 +48,7 @@
             </template>
           </v-select>
         </v-col>
-      </v-row> -->
+      </v-row>
       <v-row>
         <v-col>
           <airport ref="airport" v-model="data.airport" />
@@ -119,6 +119,88 @@
           </v-datetime-picker>
         </v-col>
       </v-row>
+      <div class="text-h5 mb-1 py-5 ">
+        Father
+      </div>
+      <v-row>
+        <v-col>
+          <v-text-field v-model="data.father_first_name" label="Father First Name" />
+        </v-col>
+        <v-col>
+          <v-text-field v-model="data.father_last_name" label="Father Last Name" />
+        </v-col>
+        <v-col>
+          <v-text-field v-model="data.father_email" label="Father Email" />
+        </v-col>
+      </v-row>
+      <div class="text-h5 mb-1 py-5 ">
+        Mother
+      </div>
+      <v-row>
+        <v-col>
+          <v-text-field v-model="data.mother_first_name" label="Mother First Name" />
+        </v-col>
+        <v-col>
+          <v-text-field v-model="data.mother_last_name" label="Mother Last Name" />
+        </v-col>
+        <v-col>
+          <v-text-field v-model="data.mother_email" label="Mother Email" />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <div class="text-h5 mb-1 py-5 ">
+            Father Address
+          </div>
+          <v-row>
+            <v-col cols="6">
+              <v-text-field v-model="data.father_address_line_1" label="Address line 1" />
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-text-field v-model="data.father_address_line_2" label="Address line 2" />
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-text-field v-model="data.father_address_city" label="City" />
+            </v-col>
+            <v-col>
+              <v-text-field v-model="data.father_address_postal_code" label="Postal code" />
+            </v-col>
+            <v-col>
+              <v-text-field v-model="data.father_address_country" label="Country" />
+            </v-col>
+          </v-row>
+        </v-col>
+        <v-col cols="6">
+          <div class="text-h5 mb-1 py-5 ">
+            Mother Address
+          </div>
+          <v-row>
+            <v-col>
+              <v-text-field v-model="data.mother_address_line_1" label="Address line 1" />
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-text-field v-model="data.mother_address_line_2" label="Address line 2" />
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-text-field v-model="data.mother_address_city" label="City" />
+            </v-col>
+            <v-col>
+              <v-text-field v-model="data.mother_address_postal_code" label="Postal code" />
+            </v-col>
+            <v-col>
+              <v-text-field v-model="data.mother_address_country" label="Country" />
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
       <v-btn @click="submit">
         Submit
       </v-btn>
@@ -143,6 +225,7 @@ export default {
   data () {
     return {
       schema: {},
+      differentAddress: false,
       data: { interview: this.getInterviewDefaultDate() },
       program_list: [],
       airport_list: [],
