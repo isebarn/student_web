@@ -49,6 +49,7 @@ export default {
         { title: 'Applications', to: 'applications', precedence: 2 },
         { title: 'Account', to: 'account', precedence: 2 },
         { title: 'Airport', to: 'airport_code', precedence: 2 },
+        { title: 'Table Data', to: 'data', precedence: 2 },
         { title: 'Flight Info', to: 'flight_info', precedence: 2 },
         { title: 'Host family', to: 'host_family', precedence: 2 },
         { title: 'Programs', to: 'new_program', precedence: 2 },

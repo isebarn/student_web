@@ -96,7 +96,14 @@
           readonly
           outlined
           label="Balance"
-        />
+          :class="owed === '0' ? 'completed' : 'working'"
+        >
+          <template v-if="owed === '0'" #append>
+            <v-icon color="green">
+              mdi-check-circle-outline
+            </v-icon>
+          </template>
+        </v-text-field>
         </v-list-item>
       </v-list>
     </v-row>
@@ -223,3 +230,13 @@ export default {
   }
 }
 </script>
+<style scoped>
+
+.completed >>> fieldset {
+  border-color: green;
+  border-width: 2px;
+  label:  green;
+}
+
+.working >>> fieldset {}
+</style>
