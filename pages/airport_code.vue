@@ -27,7 +27,7 @@ export default {
   methods: {
     async submit () {
       await this.$axios.$post('api/airport', {
-        airport: this.airport,
+        name: this.airport,
         code: this.code
       })
 
