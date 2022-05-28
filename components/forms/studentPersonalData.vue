@@ -22,10 +22,10 @@
       </v-row>
       <v-row>
         <v-col>
-          <datePick v-model="date_of_birth" path="studentPersonalData/setDateOfBirth" label="Date of birth" />
+          <datePick2 path="studentPersonalData" item="DateOfBirth" label="Date of birth" />
         </v-col>
         <v-col>
-          <datePick v-model="date_of_application" path="studentPersonalData/setDateOfApplication" label="Date of Application" />
+          <datePick2 path="studentPersonalData" item="DateOfApplication" label="Date of Application" />
         </v-col>
       </v-row>
       <v-row>
@@ -146,11 +146,12 @@
 
 import { mapFields } from 'vuex-map-fields'
 import { mapActions } from 'vuex'
-import datePick from '../datePick'
+// import datePick from '../datePick'
+import datePick2 from '../datePick2'
 
 export default {
   name: 'StudentPersonalDataForm',
-  components: { datePick },
+  components: { datePick2 },
 
   computed: {
     ...mapFields('studentPersonalData', [

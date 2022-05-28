@@ -1,12 +1,15 @@
 <template>
   <v-container>
-    asd
+    <datePick path="test" item="Test" label="asd" />
   </v-container>
 </template>
 
 <script>
+import datePick from '../components/datePick2'
 export default {
   name: 'DevPage',
+
+  components: { datePick },
 
   data () {
     return {

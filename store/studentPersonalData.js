@@ -5,7 +5,7 @@ export const state = () => ({
     allergies: '',
     average_grades: '',
     date_of_application: null,
-    date_of_birth: null,
+    date_of_birth: '2020-01-01',
     nationality: '',
     school_name: '',
     school_type: '',
@@ -100,11 +100,11 @@ export const mutations = {
   },
 
   date_of_birth: (state, payload) => {
-    state.date_of_birth = payload
+    state.data.date_of_birth = payload
   },
 
   date_of_application: (state, payload) => {
-    state.date_of_application = payload
+    state.data.date_of_application = payload
   },
 
   child: (state, payload) => {
@@ -125,6 +125,10 @@ export const getters = {
 
   getPhone (state) {
     return state.data.host_family.phone.extension
+  },
+
+  getDateOfBirth (state) {
+    return state.data.date_of_birth
   }
 }
 

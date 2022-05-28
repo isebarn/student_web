@@ -36,7 +36,9 @@ export default {
     { src: '~/plugins/vuetify-mask.js', mode: 'client' },
     { src: '~/plugins/datetime-picker.js', mode: 'client' },
     { src: '~/plugins/users.js', mode: 'client' },
-    '~/plugins/flags'
+    '~/plugins/flags',
+        '~/plugins/filters',
+
     ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
