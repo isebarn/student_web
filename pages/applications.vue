@@ -45,7 +45,7 @@ export default {
   },
 
   async fetch () {
-    this.applications = await this.$axios.$get('api/student_personal_data')
+    this.applications = await this.$axios.$get('api/student_profile')
   }
 }
 </script>

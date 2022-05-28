@@ -1,5 +1,5 @@
 <template>
-  <v-autocomplete v-model="program" :filter="onFilter" :items="programmes" label="Program" @change="handleChange">
+  <v-autocomplete v-model="program" :filter="onFilter" :items="programs" label="Program">
     <template #selection="{item}">
       {{ item.code }} - {{ item.description }} - € {{ item.price }} - {{ item.country }}
     </template>
@@ -22,24 +22,21 @@
 </template>
 
 <script>
+import { mapFields } from 'vuex-map-fields'
+import { mapActions } from 'vuex'
 export default {
   name: 'ProgramAutocomplete',
-  prop: ['value'],
-
-  data () {
-    return {
-      program: null,
-      programmes: []
-    }
-  },
 
   async fetch () {
-    this.programmes = await this.$axios.$get('api/program')
+    await this.populate()
   },
+
+  computed: {
+    ...mapFields('program', ['programs', 'program'])
+  },
+
   methods: {
-    handleChange () {
-      this.$emit('input', this.program)
-    },
+    ...mapActions('program', ['populate']),
 
     onFilter (item, queryText, itemText) {
       return item.country.toLocaleLowerCase().includes(queryText.toLocaleLowerCase()) || item.description.toLocaleLowerCase().includes(queryText.toLocaleLowerCase()) || item.code.toLocaleLowerCase().includes(queryText.toLocaleLowerCase())

@@ -1,0 +1,167 @@
+import { getField, updateField } from 'vuex-map-fields'
+
+export const state = () => ({
+  data: {
+    allergies: '',
+    average_grades: '',
+    date_of_application: null,
+    date_of_birth: null,
+    nationality: '',
+    school_name: '',
+    school_type: '',
+    address: {
+      line_1: '',
+      line_2: '',
+      city: '',
+      postal_code: '',
+      country: ''
+    },
+    father: {
+      first_name: '',
+      last_name: '',
+      email: '',
+      address: {
+        line_1: '',
+        line_2: '',
+        city: '',
+        postal_code: '',
+        country: ''
+      }
+    },
+    mother: {
+      first_name: '',
+      last_name: '',
+      email: '',
+      address: {
+        line_1: '',
+        line_2: '',
+        city: '',
+        postal_code: '',
+        country: ''
+      }
+    },
+    host_school: {
+      name: '',
+      contact: '',
+      email: '',
+      address: {
+        line_1: '',
+        line_2: '',
+        city: '',
+        postal_code: '',
+        country: ''
+      }
+    },
+    host_family: {
+      number: '',
+      family_name: '',
+      father: {
+        first_name: '',
+        last_name: '',
+        age: null,
+        occupation: '',
+        email: ''
+      },
+      mother: {
+        first_name: '',
+        last_name: '',
+        age: null,
+        occupation: '',
+        email: ''
+      },
+      address: {
+        line_1: '',
+        line_2: '',
+        city: '',
+        postal_code: '',
+        country: ''
+      },
+      phone: {
+        extension: '',
+        number: ''
+      },
+      child: [],
+      pet: [],
+      smoking: false,
+      profile_link: ''
+    },
+    host_airport: {
+      name: '',
+      code: ''
+    }
+  }
+})
+
+export const mutations = {
+  updateField,
+
+  data: (state, payload) => {
+    state.data = { ...state.data, ...payload }
+  },
+
+  date_of_birth: (state, payload) => {
+    state.date_of_birth = payload
+  },
+
+  date_of_application: (state, payload) => {
+    state.date_of_application = payload
+  },
+
+  child: (state, payload) => {
+    state.data.host_family.child.push(payload)
+  },
+
+  pet: (state, payload) => {
+    state.data.host_family.pet.push(payload)
+  },
+
+  phone: (state, payload) => {
+    state.data.host_family.phone.extension = payload
+  }
+}
+
+export const getters = {
+  getField,
+
+  getPhone (state) {
+    return state.data.host_family.phone.extension
+  }
+}
+
+export const actions = {
+  async load ({ commit, state, rootState, dispatch }, studentProfile) {
+    const data = await this.$axios.$get(`api/student_personal_data?student_profile=${studentProfile}`)
+    if (data.length > 0) {
+      commit('data', data[0])
+    }
+  },
+
+  async save ({ commit, state, rootState }) {
+    const data = await this.$axios.$patch('api/student_personal_data', {
+      ...state.data
+    })
+
+    commit('data', data)
+  },
+
+  setDateOfBirth ({ commit }, payload) {
+    commit('date_of_birth', payload)
+  },
+
+  setDateOfApplication ({ commit }, payload) {
+    commit('date_of_application', payload)
+  },
+
+  addChild ({ commit }, payload) {
+    commit('child', payload)
+  },
+
+  addPet ({ commit }, payload) {
+    commit('pet', payload)
+  },
+
+  setPhone ({ commit }, payload) {
+    console.log(payload)
+    commit('phone', payload)
+  }
+}

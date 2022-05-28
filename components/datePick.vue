@@ -30,8 +30,10 @@
 </template>
 
 <script>
+
 export default {
-  props: ['value', 'label'],
+  props: ['value', 'label', 'path'],
+
   data: () => ({
     activePicker: null,
     date: null,
@@ -46,6 +48,7 @@ export default {
     save (date) {
       this.$refs.menu.save(date)
       this.$emit('input', this.date)
+      this.$store.dispatch(this.path, this.date)
     }
   }
 }

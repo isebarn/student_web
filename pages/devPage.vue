@@ -1,13 +1,13 @@
 <template>
   <v-container>
-    <v-text-field v-model="name" outlined :class="name === '0' ? 'completed' : 'working'" label="heh" />
+    asd
   </v-container>
 </template>
 
 <script>
-
 export default {
   name: 'DevPage',
+
   data () {
     return {
       name: '0'

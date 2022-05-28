@@ -35,6 +35,7 @@ export default {
   plugins: [
     { src: '~/plugins/vuetify-mask.js', mode: 'client' },
     { src: '~/plugins/datetime-picker.js', mode: 'client' },
+    { src: '~/plugins/users.js', mode: 'client' },
     '~/plugins/flags'
     ],
 

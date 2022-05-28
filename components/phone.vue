@@ -1,5 +1,12 @@
 <template>
-  <v-autocomplete v-model="code" :items="countries" :filter="onFilter" item-value="dial_code" @change="handleChange">
+  <v-autocomplete
+    v-model="code"
+    return-object
+    :items="countries"
+    :filter="onFilter"
+    item-value="dial_code"
+    @change="handleChange"
+  >
     <template #selection="{item}">
       {{ item.flag }} ({{ item.dial_code }})
     </template>
@@ -16,9 +23,10 @@
 </template>
 
 <script>
+
 export default {
   name: 'InternationalPhone',
-  props: ['value'],
+  props: ['path'],
   data () {
     return {
       countries: this.$getCountries(),
@@ -27,8 +35,10 @@ export default {
   },
 
   created () {
-    if (this.value) {
-      this.code = this.countries.find(x => x.dial_code === this.value)
+    const value = this.$store.getters[`${this.path}/getPhone`]
+    if (value) {
+      const code = this.countries.find(x => x.dial_code === value)
+      this.$set(this, 'code', code)
     } else {
       this.findCountry()
     }
@@ -38,11 +48,12 @@ export default {
     findCountry () {
       this.$axios.get('http://ip-api.com/json').then((res) => {
         this.code = this.countries.find(x => x.code === res.data.countryCode)
+        this.handleChange()
       })
     },
 
     handleChange () {
-      this.$emit('input', this.code)
+      this.$store.dispatch(`${this.path}/setPhone`, this.code.dial_code)
     },
 
     onFilter (item, queryText, itemText) {
