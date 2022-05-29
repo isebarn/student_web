@@ -38,7 +38,19 @@ export const mutations = {
 }
 
 export const getters = {
-  getField
+  getField,
+
+  interview (state) {
+    if (state.data.interview) {
+      return new Date(state.data.interview)
+    } else {
+      const date = new Date()
+      date.setDate(date.getDate() + 7)
+      date.setHours(16, 30, 0)
+
+      return date
+    }
+  }
 }
 
 export const actions = {

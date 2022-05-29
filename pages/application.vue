@@ -43,7 +43,7 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-datetime-picker v-model="interviewTime" label="Interview time">
+            <v-datetime-picker v-model="interviewModel" label="Interview time">
               <template slot="dateIcon">
                 <v-icon>mdi-calendar</v-icon>
               </template>
@@ -55,7 +55,7 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-btn :disabled="!interview" @click="scheduleInterview">
+            <v-btn :disabled="interview !== null" @click="scheduleInterview">
               Schedule Interview
             </v-btn>
           </v-col>
@@ -102,7 +102,7 @@ export default {
   data () {
     return {
       tab: null,
-      interviewTime: null
+      interviewTime: this.getInterviewDefaultDate()
     }
   },
 
@@ -111,17 +111,18 @@ export default {
     await this.loadStudentPersonalData(this.profileId)
   },
 
-  created () {
-    if (this.submitted && !this.interview) {
-      this.interviewTime = this.getInterviewDefaultDate()
-    } else {
-      this.interviewTime = this.interview
-    }
-  },
-
   computed: {
     ...mapFields('studentPersonalData', ['data.id']),
-    ...mapFields('studentProfile', { profileId: 'data.id', interview: 'data.interview', submitted: 'data.submitted' })
+    ...mapFields('studentProfile', { profileId: 'data.id', interview: 'data.interview', submitted: 'data.submitted' }),
+
+    interviewModel: {
+      get () {
+        return this.interview ? new Date(this.interview) : this.interviewTime
+      },
+      set (newValue) {
+        this.interviewTime = newValue
+      }
+    }
   },
 
   methods: {
@@ -130,7 +131,7 @@ export default {
     ...mapActions('studentProfile', ['save', 'setInterview']),
 
     scheduleInterview () {
-      this.setInterview(this.getInterviewDefaultDate())
+      this.setInterview(this.interviewModel)
       this.save()
     },
 

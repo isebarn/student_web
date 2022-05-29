@@ -37,8 +37,7 @@ export default {
     { src: '~/plugins/datetime-picker.js', mode: 'client' },
     { src: '~/plugins/users.js', mode: 'client' },
     '~/plugins/flags',
-        '~/plugins/filters',
-
+    '~/plugins/filters',
     ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

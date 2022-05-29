@@ -9,7 +9,7 @@
           <v-text-field v-model="family_name" label="Family Name" />
         </v-col>
       </v-row>
-      <div class="text-h5 mb-1 py-5 ">
+      <div class="text-h5 mb-1 pa-5 ">
         Father
       </div>
       <v-row>
@@ -31,7 +31,7 @@
           <v-text-field v-model="father_email" label="Father Email" />
         </v-col>
       </v-row>
-      <div class="text-h5 mb-1 py-5 ">
+      <div class="text-h5 mb-1 pa-5 ">
         Mother
       </div>
       <v-row>
@@ -53,7 +53,7 @@
           <v-text-field v-model="mother_email" label="Mother Email" />
         </v-col>
       </v-row>
-      <div class="text-h5 mb-1 py-5 ">
+      <div class="text-h5 mb-1 pa-5 ">
         Address
       </div>
       <v-row>
@@ -85,11 +85,24 @@
         <v-col><phone path="studentPersonalData" /></v-col>
         <v-col><v-text-field /></v-col>
       </v-row>
-      <div class="text-h5 mb-1 py-5 ">
+      <div class="text-h5 mb-1 pa-5 ">
         Children
       </div>
       <v-row>
-        <v-col>
+        <v-col cols="6">
+          <v-row>
+            <v-text-field v-model="childName" label="Name" />
+          </v-row>
+          <v-row>
+            <v-text-field v-model="childGender" label="Gender" />
+          </v-row>
+          <v-row>
+            <v-btn block @click="addChild">
+              Add
+            </v-btn>
+          </v-row>
+        </v-col>
+        <v-col cols="6">
           <v-list-item
             v-for="(item, i) in child"
             :key="i"
@@ -101,47 +114,35 @@
           </v-list-item>
         </v-col>
       </v-row>
-      <v-row>
-        <v-col>
-          <v-text-field v-model="childName" label="Name" />
-        </v-col>
-        <v-col>
-          <v-text-field v-model="childGender" label="Gender" />
-        </v-col>
-      </v-row>
-      <v-btn @click="addChild">
-        Add
-      </v-btn>
-      <div class="text-h5 mb-1 py-5 ">
+      <v-row />
+      <div class="text-h5 mb-1 pa-5 ">
         Pets
       </div>
-      <v-list-item
-        v-for="(item, i) in pet"
-        :key="i"
-      >
-        <v-list-item-content>
-          <v-list-item-title>{{ item.name }}</v-list-item-title>
-          <v-list-item-subtitle>{{ item.type }} {{ item.inside ? ' (inside)': '' }}</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
       <v-row>
-        <v-col>
-          <v-text-field v-model="petName" label="Pet name" />
+        <v-col cols="6">
+          <v-row><v-text-field v-model="petName" label="Pet name" /></v-row>
+          <v-row><v-text-field v-model="petType" label="Pet type" /></v-row>
+          <v-row><v-checkbox v-model="petInside" label="Inside" /></v-row>
+          <v-btn block @click="addPet">
+            Add
+          </v-btn>
         </v-col>
-        <v-col>
-          <v-text-field v-model="petType" label="Pet type" />
-        </v-col>
-        <v-col>
-          <v-checkbox v-model="petInside" label="Inside" />
+        <v-col cols="6">
+          <v-list-item
+            v-for="(item, i) in pet"
+            :key="i"
+          >
+            <v-list-item-content>
+              <v-list-item-title>{{ item.name }}</v-list-item-title>
+              <v-list-item-subtitle>{{ item.type }} {{ item.inside ? ' (inside)': '' }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
         </v-col>
       </v-row>
-      <v-btn @click="addPet">
-        Add
-      </v-btn>
       <v-row>
         <v-col>
-          <v-btn @click="save">
-            Submit
+          <v-btn class="success" block @click="save">
+            Save
           </v-btn>
         </v-col>
       </v-row>
@@ -222,83 +223,11 @@ export default {
       this.petInside = false
     }
   }
-
-  // components: { airportPicker },
-
-/*  async fetch () {
-    const swagger = await this.$axios.$get('swagger.json')
-    this.schema = swagger.definitions.student_personal_data.properties
-    this.clear()
-
-    for (const [key, value] of Object.entries(this.schema)) {
-      if (value.$ref) {
-        this[`${key}_list`] = await this.$axios.$get(`api/${key}`)
-      }
-    }
-
-    const checkObjectId = /^[a-f\d]{24}$/i
-    if (this.$route.query.id) {
-      const data = await this.$axios.$get(`api/host_family/${this.$route.query.id}`)
-      for (const [key, value] of Object.entries(data)) {
-        if (value instanceof Object && checkObjectId.test(value.id)) {
-          const item = this[`${key}_list`].find(x => x.id === value.id)
-          this.data[key] = item
-          this.$refs[key][key] = item
-        } else if (this.schema[key].format === 'date-time') {
-          if (key.startsWith('date_')) {
-            this.$refs[key].date = value.split('T')[0]
-          } else {
-            this.data[key] = new Date(value)
-          }
-        } else {
-          this.data[key] = value
-        }
-      }
-    }
-  },
-
-  methods: {
-    async submit () {
-      if (this.data.id) {
-        await this.$axios.$put('api/host_family', Object.fromEntries(Object.entries(this.data).filter(([_, v]) => v !== null && v !== '')))
-      } else {
-        await this.$axios.$post('api/host_family', Object.fromEntries(Object.entries(this.data).filter(([_, v]) => v !== null && v !== '')))
-        this.clear()
-      }
-    },
-
-    addChild () {
-      if (!this.data.host_family_child) {
-        this.$set(this.data, 'host_family_child', [])
-      }
-      this.data.host_family_child.push(this.child)
-      this.child = {
-        name: '',
-        gender: ''
-      }
-    },
-
-    addPet () {
-      if (!this.data.host_family_pet) {
-        this.$set(this.data, 'host_family_pet', [])
-      }
-      this.data.host_family_pet.push(this.pet)
-      this.pet = {
-        name: '',
-        type: '',
-        inside: null
-      }
-    },
-
-    clear () {
-      for (const [key, value] of Object.entries(this.schema)) {
-        if ('type' in value && key !== 'id') {
-          this.$set(this.data, key, '')
-        } else if ('$ref' in value && this.$refs[key]) {
-          this.$set(this.$refs[key], key, null)
-        }
-      }
-    }
-  } */
 }
 </script>
+
+<style>
+  .row {
+    padding: 20px;
+  }
+</style>

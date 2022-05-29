@@ -10,7 +10,7 @@
     >
       <template #activator="{ on, attrs }">
         <v-text-field
-          v-model="date"
+          :value="date | date"
           :label="label"
           append-icon="mdi-calendar"
           readonly
@@ -32,7 +32,12 @@
 <script>
 
 export default {
-  props: ['path', 'item', 'label'],
+
+  props: {
+    path: { type: String, required: true },
+    item: { type: String, required: true },
+    label: { type: String, default: '' }
+  },
 
   data: () => ({
     activePicker: null,
