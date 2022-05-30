@@ -33,6 +33,7 @@
     </v-navigation-drawer>
     <v-main style="background-color: #FCFDFC;">
       <v-container style="background-color: #FCFDFC;">
+        <axios />
         <Nuxt />
       </v-container>
     </v-main>
@@ -40,14 +41,19 @@
 </template>
 
 <script>
+import axios from '../components/axios'
 export default {
   name: 'DefaultLayout',
+
+  components: { axios },
+
   data () {
     return {
       god: false,
       items: [
         { title: 'Applications', to: 'applications', precedence: 2 },
         { title: 'Table Data', to: 'data', precedence: 2 },
+        { title: 'Programs', to: 'new_program', precedence: 2 },
         { title: 'Users', to: 'users', precedence: 2 }
       ]
     }

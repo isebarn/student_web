@@ -36,6 +36,7 @@ export default {
     { src: '~/plugins/vuetify-mask.js', mode: 'client' },
     { src: '~/plugins/datetime-picker.js', mode: 'client' },
     { src: '~/plugins/users.js', mode: 'client' },
+    { src: '~/plugins/axios.js', mode: 'client' },
     '~/plugins/flags',
     '~/plugins/filters',
     ],

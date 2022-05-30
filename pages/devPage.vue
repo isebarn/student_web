@@ -1,21 +1,23 @@
 <template>
   <v-container>
-    <datePick path="test" item="Test" label="asd" />
+    <axios />
+    <v-text-field v-model="asd" />
   </v-container>
 </template>
 
 <script>
-import datePick from '../components/datePick2'
+import axios from '../components/axios'
 export default {
   name: 'DevPage',
 
-  components: { datePick },
+  components: { axios },
 
   data () {
     return {
-      name: '0'
+      asd: ''
     }
   }
+
 }
 </script>
 
