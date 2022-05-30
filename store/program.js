@@ -31,8 +31,6 @@ export const actions = {
   },
 
   setProgram ({ commit, state }, payload) {
-    if (state.programs) {
-      commit('program', state.programs.find(x => x.id === payload.id))
-    }
+    commit('program', payload)
   }
 }

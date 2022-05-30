@@ -17,7 +17,15 @@ export const state = () => ({
     description: '',
     imagine: '',
     submitted: false,
-    interview: null
+    interview: null,
+    program: {
+      id: '',
+      country: '',
+      description: '',
+      code: '',
+      program_price: null,
+      price: null
+    }
   }
 })
 
@@ -55,10 +63,9 @@ export const getters = {
 
 export const actions = {
   async load ({ commit, state, rootState, dispatch }, query) {
-    const data = await this.$axios.$get(`api/student_profile?${query.key}=${query.value}`)
+    const data = await this.$axios.$get(`api/student_profile?$include=program&${query.key}=${query.value}`)
     if (data.length > 0) {
       commit('data', data[0])
-
       if (data[0].program && data[0].program.id) {
         dispatch('program/setProgram', data[0].program, { root: true })
       }
@@ -66,11 +73,20 @@ export const actions = {
   },
 
   async save ({ commit, state, rootState }) {
-    const data = await this.$axios.$post('api/student_profile', {
-      ...state.data,
-      program: rootState.program.program,
-      email: rootState.auth.user.attributes.email
-    })
+    let data = {}
+    if (state.data.id) {
+      data = await this.$axios.$patch('api/student_profile', {
+        ...state.data,
+        program: rootState.program.program,
+        email: rootState.auth.user.attributes.email
+      })
+    } else {
+      data = await this.$axios.$post('api/student_profile', {
+        ...state.data,
+        program: rootState.program.program,
+        email: rootState.auth.user.attributes.email
+      })
+    }
 
     commit('data', data)
 

@@ -9,6 +9,18 @@ export const state = () => ({
     nationality: '',
     school_name: '',
     school_type: '',
+    account: {
+      diet: null,
+      region: null,
+      other_reason: '',
+      other: null,
+      credits_reason: '',
+      credits: null,
+      deposit: null,
+      second_installment: null,
+      third_installment: null,
+      final_installment: null
+    },
     address: {
       line_1: '',
       line_2: '',
@@ -89,7 +101,8 @@ export const state = () => ({
       name: '',
       code: ''
     }
-  }
+  },
+  total: null
 })
 
 export const mutations = {
@@ -117,6 +130,11 @@ export const mutations = {
 
   phone: (state, payload) => {
     state.data.host_family.phone.extension = payload
+  },
+
+  updateAccountField (state, field) {
+    console.log(2)
+    updateField(state.data.account, field)
   }
 }
 
@@ -129,10 +147,16 @@ export const getters = {
 
   getDateOfBirth (state) {
     return state.data.date_of_birth
+  },
+
+  getAccountField (state) {
+    console.log(1)
+    return getField(state.data.account)
   }
 }
 
 export const actions = {
+
   async load ({ commit, state, rootState, dispatch }, studentProfile) {
     const data = await this.$axios.$get(`api/student_personal_data?student_profile=${studentProfile}`)
     if (data.length > 0) {

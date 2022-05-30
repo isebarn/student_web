@@ -41,7 +41,7 @@ export default {
       description: '',
       code: '',
       program_price: null,
-      price: ''
+      price: null
     }
   },
 
@@ -62,8 +62,8 @@ export default {
       this.country = ''
       this.description = ''
       this.code = ''
-      this.$ref.program_price.money = ''
-      this.price = ''
+      this.$refs.program_price.money = ''
+      this.price = null
     }
   }
 }
