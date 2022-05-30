@@ -132,9 +132,8 @@ export const mutations = {
     state.data.host_family.phone.extension = payload
   },
 
-  updateAccountField (state, field) {
-    console.log(2)
-    updateField(state.data.account, field)
+  account: (state, payload) => {
+    state.data.account = payload
   }
 }
 
@@ -147,11 +146,6 @@ export const getters = {
 
   getDateOfBirth (state) {
     return state.data.date_of_birth
-  },
-
-  getAccountField (state) {
-    console.log(1)
-    return getField(state.data.account)
   }
 }
 
@@ -189,7 +183,10 @@ export const actions = {
   },
 
   setPhone ({ commit }, payload) {
-    console.log(payload)
     commit('phone', payload)
+  },
+
+  updateAccounts ({ commit }, payload) {
+    commit('account', payload)
   }
 }

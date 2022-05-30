@@ -109,7 +109,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-btn @click="save">
+        <v-btn @click="update">
           Save
         </v-btn>
       </v-col>
@@ -118,15 +118,27 @@
 </template>
 
 <script>
+import { mapFields } from 'vuex-map-fields'
+import { mapActions } from 'vuex'
 import money from '../money'
-
 export default {
   name: 'AccountData',
   components: { money },
   data () {
     return {
-      program: {},
-      data: {},
+      data: {
+
+        diet: null,
+        region: null,
+        other_reason: '',
+        other: null,
+        credits_reason: '',
+        credits: null,
+        deposit: null,
+        second_installment: null,
+        third_installment: null,
+        final_installment: null
+      },
       installments: [
         { obj: 'deposit', description: 'Deposit', ratio: 0.20 },
         { obj: 'second_installment', description: '2nd', ratio: 0.30 },
@@ -137,44 +149,10 @@ export default {
     }
   },
 
-  async fetch () {
-    const swagger = await this.$axios.$get('swagger.json')
-    this.schema = swagger.definitions.account.properties
-
-    for (const [key, value] of Object.entries(this.schema)) {
-      if (value.$ref) {
-        this[`${key}_list`] = await this.$axios.$get(`api/${key}`)
-      }
-    }
-
-    const checkObjectId = /^[a-f\d]{24}$/i
-    if (this.$route.query.id) {
-      const studentPersonalData = await this.$axios.$get(`api/student_personal_data/${this.$route.query.id}`)
-      this.program = studentPersonalData.program
-
-      if (studentPersonalData.account) {
-        const data = await this.$axios.$get(`api/account/${studentPersonalData.account.id}`)
-        for (const [key, value] of Object.entries(data)) {
-          if (key === 'id') {
-            continue
-          } else if (value instanceof Object && checkObjectId.test(value.id)) {
-            continue
-          } else if (this.schema[key].format === 'date-time') {
-            if (key.startsWith('date_')) {
-              this.$refs[key].date = value.split('T')[0]
-            } else {
-              this.data[key] = new Date(value)
-            }
-          } else {
-            this.$set(this.data, key, value)
-            this.$set(this.$refs[key], 'money', value)
-          }
-        }
-      }
-    }
-  },
-
   computed: {
+    ...mapFields('studentProfile', ['data.program']),
+    ...mapFields('studentPersonalData', ['data.account']),
+
     total () {
       return (this.program.price +
       (this.data.diet ?? 0) +
@@ -182,6 +160,7 @@ export default {
       (this.data.other ?? 0) -
       (this.data.credits ?? 0)).toFixed(0)
     },
+
     owed () {
       return (this.total -
       (this.data.deposit ?? 0) -
@@ -191,41 +170,30 @@ export default {
     }
   },
 
+  mounted () {
+    this.$set(this.$refs.diet, 'money', 2000)
+    for (const [key, value] of Object.entries(this.account)) {
+      if (value) {
+        this.$set(this.data, key, value)
+
+        if (this.$refs[key]) {
+          this.$set(this.$refs[key], 'money', value)
+        }
+      }
+    }
+  },
+
   methods: {
-    god () {
-      const newData = {}
-      for (const [key, value] of Object.entries(this.$refs)) {
-        newData[key] = value.money
-      }
-      for (const [key, value] of Object.entries(this.data)) {
-        newData[key] = value
-      }
+    ...mapActions('studentPersonalData', ['updateAccounts', 'save']),
 
-      console.log(newData)
+    updateData () {
+      this.data = { ...this.account, ...this.data }
     },
-    async save () {
-      const newData = {}
-      for (const [key, value] of Object.entries(this.$refs)) {
-        newData[key] = value.money
-      }
-      for (const [key, value] of Object.entries(this.data)) {
-        newData[key] = value
-      }
 
-      console.log(newData)
-      if (this.data.id) {
-        await this.$axios.$put('api/account', {
-          ...newData,
-          id: this.data.id
-        })
-      } else {
-        const data = await this.$axios.$post('api/account', newData)
-
-        await this.$axios.$patch('api/student_personal_data', {
-          id: this.$route.query.id,
-          account: data.id
-        })
-      }
+    async update () {
+      this.updateData()
+      this.updateAccounts(this.data)
+      await this.save()
     }
   }
 }
