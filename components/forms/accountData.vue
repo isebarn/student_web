@@ -171,7 +171,6 @@ export default {
   },
 
   mounted () {
-    this.$set(this.$refs.diet, 'money', 2000)
     for (const [key, value] of Object.entries(this.account)) {
       if (value) {
         this.$set(this.data, key, value)
