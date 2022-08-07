@@ -3,10 +3,10 @@
     <v-container>
       <v-row>
         <v-col>
-          <v-text-field v-model="number" label="Host Family Number" />
+          <v-text-field v-model="number" label="Host Family Number" maxlength="10" counter="10" />
         </v-col>
         <v-col>
-          <v-text-field v-model="family_name" label="Family Name" />
+          <v-text-field v-model="family_name" label="Family Name" maxlength="30" counter="30" />
         </v-col>
       </v-row>
       <div class="text-h5 mb-1 pa-5 ">
@@ -14,21 +14,32 @@
       </div>
       <v-row>
         <v-col>
-          <v-text-field v-model="father_first_name" label="Father First Name" />
+          <v-text-field v-model="father_first_name" label="Father First Name" maxlength="20" counter="20" />
         </v-col>
         <v-col>
-          <v-text-field v-model="father_last_name" label="Father Last Name" />
+          <v-text-field v-model="father_last_name" label="Father Last Name" maxlength="30" counter="30" />
+        </v-col>
+        <v-col cols="2">
+          <v-text-field
+            v-model="father_age"
+            label="Father Age"
+            counter="3"
+            type="number"
+            max="999"
+            min="1"
+            oninput="if(Number(this.value) > Number(this.max)) this.value = this.max;"
+          />
         </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <v-text-field v-model="father_age" label="Father Age" />
+          <v-text-field v-model="father_occupation" label="Father Occupation" maxlength="20" counter="20" />
         </v-col>
         <v-col>
-          <v-text-field v-model="father_occupation" label="Father Occupation" />
+          <v-text-field v-model="father_email" label="Father Email" maxlength="40" counter="40" />
         </v-col>
         <v-col>
-          <v-text-field v-model="father_email" label="Father Email" />
+          <v-text-field v-model="father_tel" label="Father Telephone" maxlength="15" counter="15" />
         </v-col>
       </v-row>
       <div class="text-h5 mb-1 pa-5 ">
@@ -36,21 +47,32 @@
       </div>
       <v-row>
         <v-col>
-          <v-text-field v-model="mother_first_name" label="Mother First Name" />
+          <v-text-field v-model="mother_first_name" label="Mother First Name" maxlength="20" counter="20" />
         </v-col>
         <v-col>
-          <v-text-field v-model="mother_last_name" label="Mother Last Name" />
+          <v-text-field v-model="mother_last_name" label="Mother Last Name" maxlength="30" counter="30" />
+        </v-col>
+        <v-col cols="2">
+          <v-text-field
+            v-model="mother_age"
+            label="Mother Age"
+            counter="3"
+            type="number"
+            max="999"
+            min="1"
+            oninput="if(Number(this.value) > Number(this.max)) this.value = this.max;"
+          />
         </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <v-text-field v-model="mother_age" label="Mother Age" />
+          <v-text-field v-model="mother_occupation" label="Mother Occupation" maxlength="20" counter="20" />
         </v-col>
         <v-col>
-          <v-text-field v-model="mother_occupation" label="Mother Occupation" />
+          <v-text-field v-model="mother_email" label="Mother Email" maxlength="40" counter="40" />
         </v-col>
         <v-col>
-          <v-text-field v-model="mother_email" label="Mother Email" />
+          <v-text-field v-model="mother_tel" label="Mother Telephone" maxlength="15" counter="15" />
         </v-col>
       </v-row>
       <div class="text-h5 mb-1 pa-5 ">
@@ -58,23 +80,23 @@
       </div>
       <v-row>
         <v-col>
-          <v-text-field v-model="line_1" label="Address line 1" />
+          <v-text-field v-model="line_1" label="Address line 1" maxlength="30" counter="30" />
         </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <v-text-field v-model="line_2" label="Address line 2" />
+          <v-text-field v-model="line_2" label="Address line 2" maxlength="30" counter="30" />
         </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <v-text-field v-model="city" label="City" />
+          <v-text-field v-model="city" label="City" maxlength="30" counter="30" />
         </v-col>
         <v-col>
-          <v-text-field v-model="postal_code" label="Postal code" />
+          <v-text-field v-model="postal_code" label="Postal code" maxlength="10" counter="10" />
         </v-col>
         <v-col>
-          <v-text-field v-model="country" label="Country" />
+          <v-text-field v-model="country" label="Country" maxlength="30" counter="30" />
         </v-col>
       </v-row>
       <v-row>
@@ -83,7 +105,11 @@
       </v-row>
       <v-row>
         <v-col><phone path="studentPersonalData" /></v-col>
-        <v-col><v-text-field /></v-col>
+        <v-col>
+          <v-btn block @click="addChild">
+            Bank Details
+          </v-btn>
+        </v-col>
       </v-row>
       <div class="text-h5 mb-1 pa-5 ">
         Children
@@ -91,10 +117,15 @@
       <v-row>
         <v-col cols="6">
           <v-row>
-            <v-text-field v-model="childName" label="Name" />
-          </v-row>
-          <v-row>
-            <v-text-field v-model="childGender" label="Gender" />
+            <v-col>
+              <v-text-field v-model="childName" label="Name" maxlength="20" counter="20" />
+            </v-col>
+            <v-col>
+              <v-radio-group v-model="childGender" label="Gender" row>
+                <v-radio label="Male" value="Male" />
+                <v-radio label="Female" value="Female" />
+              </v-radio-group>
+            </v-col>
           </v-row>
           <v-row>
             <v-btn block @click="addChild">
@@ -120,8 +151,9 @@
       </div>
       <v-row>
         <v-col cols="6">
-          <v-row><v-text-field v-model="petName" label="Pet name" /></v-row>
+          <v-row><v-text-field v-model="petName" label="Pet name" maxlength="10" counter="10" /></v-row>
           <v-row><v-text-field v-model="petType" label="Pet type" /></v-row>
+          <v-row><v-text-field v-model="familyHobbies" label="Family hobbies and activities" maxlength="80" counter="80" /></v-row>
           <v-row><v-checkbox v-model="petInside" label="Inside" /></v-row>
           <v-btn block @click="addPet">
             Add
@@ -166,6 +198,7 @@ export default {
       childGender: '',
       petName: '',
       petType: '',
+      familyHobbies: '',
       petInside: false
     }
   },
@@ -188,7 +221,8 @@ export default {
       father_last_name: 'data.host_family.father.last_name',
       father_age: 'data.host_family.father.age',
       father_occupation: 'data.host_family.father.occupation',
-      father_email: 'data.host_family.father.email'
+      father_email: 'data.host_family.father.email',
+      father_tel: 'data.host_family.father.tel'
     }),
 
     ...mapFields('studentPersonalData', {
@@ -196,7 +230,8 @@ export default {
       mother_last_name: 'data.host_family.mother.last_name',
       mother_age: 'data.host_family.mother.age',
       mother_occupation: 'data.host_family.mother.occupation',
-      mother_email: 'data.host_family.mother.email'
+      mother_email: 'data.host_family.mother.email',
+      mother_tel: 'data.host_family.mother.tel'
     }),
 
     ...mapMultiRowFields('studentPersonalData', ['data.host_family.child', 'data.host_family.pet'])
@@ -217,9 +252,10 @@ export default {
     },
 
     addPet () {
-      this.newPet({ name: this.petName, type: this.petType, inside: this.petInside })
+      this.newPet({ name: this.petName, type: this.petType, familyHobbies: this.familyHobbies, inside: this.petInside })
       this.petName = ''
       this.petType = ''
+      this.familyHobbies = ''
       this.petInside = false
     }
   }

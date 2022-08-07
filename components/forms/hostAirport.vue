@@ -3,9 +3,9 @@
     <v-container>
       <v-row>
         <v-col>
-          <v-text-field v-model="name" label="Airport Name" />
+          <v-text-field v-model="name" label="Airport Name" maxlength="30" counter="30" />
         </v-col>
-        <v-col><v-text-field v-model="code" label="Airport Code" /></v-col>
+        <v-col><v-text-field v-model="code" label="Airport Code" maxlength="3" counter="3" /></v-col>
       </v-row>
       <v-row>
         <v-col>

@@ -62,6 +62,9 @@
         <v-col>
           <v-text-field v-model="father_email" label="Father Email" />
         </v-col>
+        <v-col>
+          <v-text-field v-model="father_tel" label="Father Telephone" />
+        </v-col>
       </v-row>
       <div class="text-h5 mb-1 py-5 ">
         Mother
@@ -75,6 +78,9 @@
         </v-col>
         <v-col>
           <v-text-field v-model="mother_email" label="Mother Email" />
+        </v-col>
+        <v-col>
+          <v-text-field v-model="mother_tel" label="Mother Telephone" />
         </v-col>
       </v-row>
       <v-row>
@@ -176,6 +182,7 @@ export default {
       father_first_name: 'data.father.first_name',
       father_last_name: 'data.father.last_name',
       father_email: 'data.father.email',
+      father_tel: 'data.father.tel',
       father_address_line_1: 'data.father.address.line_1',
       father_address_line_2: 'data.father.address.line_2',
       father_address_city: 'data.father.address.city',
@@ -187,6 +194,7 @@ export default {
       mother_first_name: 'data.mother.first_name',
       mother_last_name: 'data.mother.last_name',
       mother_email: 'data.mother.email',
+      mother_tel: 'data.host_family.mother.tel',
       mother_address_line_1: 'data.mother.address.line_1',
       mother_address_line_2: 'data.mother.address.line_2',
       mother_address_city: 'data.mother.address.city',

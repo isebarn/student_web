@@ -5,7 +5,7 @@ export const state = () => ({
     first_name: '',
     last_name: '',
     age_on_arrival: null,
-    gender: '',
+    gender: null,
     email: '',
     length_of_stay: '',
     passport_country: '',

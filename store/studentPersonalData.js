@@ -56,13 +56,14 @@ export const state = () => ({
       name: '',
       contact: '',
       email: '',
+      tel: '',
       address: {
         line_1: '',
-        line_2: '',
         city: '',
         postal_code: '',
         country: ''
-      }
+      },
+      web_link: ''
     },
     host_family: {
       number: '',

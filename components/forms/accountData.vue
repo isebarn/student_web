@@ -23,7 +23,7 @@
               <v-text-field v-model="data.other_reason" label="Other" />
             </v-col>
             <v-col>
-              <money ref="other" v-model="data.other" label="Ammount" />
+              <money ref="other" v-model="data.other" label="Amount" />
             </v-col>
           </v-row>
         </v-form>
@@ -43,7 +43,13 @@
         <v-row>
           <v-col>
             <money ref="credits" v-model="data.credits" label="Credit Amount" />
+          </v-col>
+          <v-col>
             <v-text-field v-model="data.credits_reason" label="Credit Reason" />
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
             <v-text-field :value="total" prefix="Total:  " readonly outlined />
           </v-col>
         </v-row>
