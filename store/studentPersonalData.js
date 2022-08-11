@@ -2,11 +2,19 @@ import { getField, updateField } from 'vuex-map-fields'
 
 export const state = () => ({
   data: {
-    allergies: '',
     average_grades: '',
     date_of_application: null,
     date_of_birth: '2020-01-01',
     nationality: '',
+    languages_spoken: '',
+    age_on_arrival: 1,
+    region_requested: '',
+    pls_describe_yourself: '',
+    imagine_life_with_host: '',
+    can_live_with_animals: null,
+    animal_no_explain: '',
+    dietary_needs: null,
+    dietary_needs_yes: '',
     school_name: '',
     school_type: '',
     account: {
@@ -27,6 +35,33 @@ export const state = () => ({
       city: '',
       postal_code: '',
       country: ''
+    },
+    school: {
+      study_subjects: '',
+      present_class: '',
+      when_leave_school: ''
+    },
+    health: {
+      allergies: null,
+      allergies_severity: null,
+      allergies_yes_explain: '',
+      eating_disorders: null,
+      eating_disorders_explain: '',
+      medication: null,
+      medication_explain: '',
+      medical_issues: null,
+      medical_issues_explain: ''
+    },
+    declaration: {
+      agree_to_exams: null,
+      agree_to_bus: null,
+      aree_for_co_student: null,
+      agree_for_no_school_contact: null,
+      agree_for_host_family: null,
+      agree_for_region: null,
+      agree_for_travel_cancellation: null,
+      agree_for_no_money_exchange: null,
+      agree_for_no_visits: null
     },
     father: {
       first_name: '',
