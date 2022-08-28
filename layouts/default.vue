@@ -52,7 +52,6 @@ export default {
       god: false,
       items: [
         { title: 'Applications', to: 'applications', precedence: 2 },
-        { title: 'Table Data', to: 'data', precedence: 2 },
         { title: 'Programs', to: 'new_program', precedence: 2 },
         { title: 'Users', to: 'users', precedence: 2 }
       ]

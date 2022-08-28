@@ -3,34 +3,35 @@
     <v-container>
       <v-row>
         <v-col>
-          <v-text-field v-model="name" label="Name" />
+          <v-text-field v-model="name" label="Name" maxlength="20" />
         </v-col>
         <v-col>
-          <v-text-field v-model="contact" label="Contact" />
+          <v-text-field v-model="contact" label="Contact" maxlength="20" />
         </v-col>
         <v-col>
-          <v-text-field v-model="email" label="Email" />
+          <v-text-field v-model="email" label="Email" maxlength="40" />
         </v-col>
-      </v-row>
-      <v-row>
         <v-col>
-          <v-text-field v-model="line_1" label="Address line 1" />
+          <v-text-field v-model="phone" label="Phone" maxlength="20" />
         </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <v-text-field v-model="line_2" label="Address line 2" />
+          <v-text-field v-model="line_1" label="Address line 1" maxlength="30" />
         </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <v-text-field v-model="city" label="City" />
+          <v-text-field v-model="city" label="City" maxlength="30" />
         </v-col>
         <v-col>
-          <v-text-field v-model="postal_code" label="Postal code" />
+          <v-text-field v-model="postal_code" label="Postal code" maxlength="10" />
         </v-col>
         <v-col>
-          <v-text-field v-model="country" label="Country" />
+          <v-text-field v-model="country" label="Country" maxlength="30" />
+        </v-col>
+        <v-col>
+          <v-text-field v-model="url" label="Link" maxlength="30" />
         </v-col>
       </v-row>
       <v-row>
@@ -59,7 +60,9 @@ export default {
       'data.host_school.address.line_2',
       'data.host_school.address.city',
       'data.host_school.address.postal_code',
-      'data.host_school.address.country'
+      'data.host_school.address.country',
+      'data.host_school.address.phone',
+      'data.host_school.address.url'
     ])
   },
 

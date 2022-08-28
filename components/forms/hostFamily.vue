@@ -2,11 +2,11 @@
   <v-form>
     <v-container>
       <v-row>
-        <v-col>
+        <!--         <v-col>
           <v-text-field v-model="number" label="Host Family Number" />
-        </v-col>
+        </v-col> -->
         <v-col>
-          <v-text-field v-model="family_name" label="Family Name" />
+          <v-text-field v-model="family_name" label="Family Name" maxlength="30" />
         </v-col>
       </v-row>
       <div class="text-h5 mb-1 pa-5 ">
@@ -14,21 +14,24 @@
       </div>
       <v-row>
         <v-col>
-          <v-text-field v-model="father_first_name" label="Father First Name" />
+          <v-text-field v-model="father_first_name" label="Father First Name" maxlength="20" />
         </v-col>
         <v-col>
-          <v-text-field v-model="father_last_name" label="Father Last Name" />
+          <v-text-field v-model="father_last_name" label="Father Last Name" maxlength="30" />
+        </v-col>
+        <v-col>
+          <v-text-field v-model="father_age" label="Father Age" maxlength="3" />
         </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <v-text-field v-model="father_age" label="Father Age" />
+          <v-text-field v-model="father_occupation" label="Father Occupation" maxlength="20" />
         </v-col>
         <v-col>
-          <v-text-field v-model="father_occupation" label="Father Occupation" />
+          <v-text-field v-model="father_email" label="Father Email" maxlength="40" />
         </v-col>
         <v-col>
-          <v-text-field v-model="father_email" label="Father Email" />
+          <v-text-field v-model="father_phone" label="Father Phone" maxlength="40" />
         </v-col>
       </v-row>
       <div class="text-h5 mb-1 pa-5 ">
@@ -36,21 +39,24 @@
       </div>
       <v-row>
         <v-col>
-          <v-text-field v-model="mother_first_name" label="Mother First Name" />
+          <v-text-field v-model="mother_first_name" label="Mother First Name" maxlength="20" />
         </v-col>
         <v-col>
-          <v-text-field v-model="mother_last_name" label="Mother Last Name" />
+          <v-text-field v-model="mother_last_name" label="Mother Last Name" maxlength="30" />
+        </v-col>
+        <v-col>
+          <v-text-field v-model="mother_age" label="Mother Age" maxlength="3" />
         </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <v-text-field v-model="mother_age" label="Mother Age" />
+          <v-text-field v-model="mother_occupation" label="Mother Occupation" maxlength="20" />
         </v-col>
         <v-col>
-          <v-text-field v-model="mother_occupation" label="Mother Occupation" />
+          <v-text-field v-model="mother_email" label="Mother Email" maxlength="40" />
         </v-col>
         <v-col>
-          <v-text-field v-model="mother_email" label="Mother Email" />
+          <v-text-field v-model="mother_phone" label="Mother Phone" maxlength="40" />
         </v-col>
       </v-row>
       <div class="text-h5 mb-1 pa-5 ">
@@ -58,32 +64,35 @@
       </div>
       <v-row>
         <v-col>
-          <v-text-field v-model="line_1" label="Address line 1" />
+          <v-text-field v-model="line_1" label="Address line 1" maxlength="30" />
         </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <v-text-field v-model="line_2" label="Address line 2" />
+          <v-text-field v-model="line_2" label="Address line 2" maxlength="30" />
         </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <v-text-field v-model="city" label="City" />
+          <v-text-field v-model="city" label="City" maxlength="30" />
         </v-col>
         <v-col>
-          <v-text-field v-model="postal_code" label="Postal code" />
+          <v-text-field v-model="postal_code" label="Postal code" maxlength="10" />
         </v-col>
         <v-col>
-          <v-text-field v-model="country" label="Country" />
+          <v-text-field v-model="country" label="Country" maxlength="30" />
         </v-col>
       </v-row>
       <v-row>
-        <v-col><v-text-field v-model="profile_link" label="Profile Link" /></v-col>
+        <v-col><v-text-field v-model="distance_from_school" label="Distance from School" /></v-col>
         <v-col><v-checkbox v-model="smoking" label="Smoking" /></v-col>
       </v-row>
-      <v-row>
+      <!--       <v-row>
         <v-col><phone path="studentPersonalData" /></v-col>
         <v-col><v-text-field /></v-col>
+      </v-row> -->
+      <v-row>
+        <v-text-field v-model="bank_details" label="Bank Details" />
       </v-row>
       <div class="text-h5 mb-1 pa-5 ">
         Children
@@ -91,13 +100,15 @@
       <v-row>
         <v-col cols="6">
           <v-row>
-            <v-text-field v-model="childName" label="Name" />
+            <v-col>
+              <v-text-field v-model="childName" label="Name" maxlength="20" />
+            </v-col>
+            <v-col>
+              <v-text-field v-model="childGender" label="Gender" :rules="[rules.gender]" />
+            </v-col>
           </v-row>
           <v-row>
-            <v-text-field v-model="childGender" label="Gender" />
-          </v-row>
-          <v-row>
-            <v-btn block @click="addChild">
+            <v-btn block :disabled="childGender !== 'M' && childGender !== 'F'" @click="addChild">
               Add
             </v-btn>
           </v-row>
@@ -120,7 +131,7 @@
       </div>
       <v-row>
         <v-col cols="6">
-          <v-row><v-text-field v-model="petName" label="Pet name" /></v-row>
+          <v-row><v-text-field v-model="petName" label="Pet name" maxlength="10" /></v-row>
           <v-row><v-text-field v-model="petType" label="Pet type" /></v-row>
           <v-row><v-checkbox v-model="petInside" label="Inside" /></v-row>
           <v-btn block @click="addPet">
@@ -141,6 +152,11 @@
       </v-row>
       <v-row>
         <v-col>
+          <v-text-field v-model="hobbies_activities" label="Hobbies & Activities" maxlength="80" />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
           <v-btn class="success" block @click="save">
             Save
           </v-btn>
@@ -154,11 +170,11 @@
 // import airportPicker from '../airport'
 import { mapFields, mapMultiRowFields } from 'vuex-map-fields'
 import { mapActions } from 'vuex'
-import phone from '../phone'
+// import phone from '../phone'
 export default {
   name: 'HostFamily',
 
-  components: { phone },
+  // components: { phone },
 
   data () {
     return {
@@ -166,7 +182,13 @@ export default {
       childGender: '',
       petName: '',
       petType: '',
-      petInside: false
+      petInside: false,
+      rules: {
+        gender: (value) => {
+          const pattern = /^M$|^F$/
+          return pattern.test(value) || 'M or F.'
+        }
+      }
     }
   },
 
@@ -179,8 +201,9 @@ export default {
       'data.host_family.address.city',
       'data.host_family.address.postal_code',
       'data.host_family.address.country',
-      'data.host_family.profile_link',
-      'data.host_family.smoking'
+      'data.host_family.distance_from_school',
+      'data.host_family.smoking',
+      'data.host_family.hobbies_activities'
     ]),
 
     ...mapFields('studentPersonalData', {
@@ -188,7 +211,8 @@ export default {
       father_last_name: 'data.host_family.father.last_name',
       father_age: 'data.host_family.father.age',
       father_occupation: 'data.host_family.father.occupation',
-      father_email: 'data.host_family.father.email'
+      father_email: 'data.host_family.father.email',
+      father_phone: 'data.host_family.father.phone'
     }),
 
     ...mapFields('studentPersonalData', {
@@ -196,7 +220,8 @@ export default {
       mother_last_name: 'data.host_family.mother.last_name',
       mother_age: 'data.host_family.mother.age',
       mother_occupation: 'data.host_family.mother.occupation',
-      mother_email: 'data.host_family.mother.email'
+      mother_email: 'data.host_family.mother.email',
+      mother_phone: 'data.host_family.mother.phone'
     }),
 
     ...mapMultiRowFields('studentPersonalData', ['data.host_family.child', 'data.host_family.pet'])

@@ -42,8 +42,14 @@
         </v-row>
         <v-row>
           <v-col>
-            <money ref="credits" v-model="data.credits" label="Credit Amount" />
-            <v-text-field v-model="data.credits_reason" label="Credit Reason" />
+            <v-row>
+              <v-col>
+                <money ref="credits" v-model="data.credits" label="Credit Amount" />
+              </v-col>
+              <v-col>
+                <v-text-field v-model="data.credits_reason" label="Credit Reason" />
+              </v-col>
+            </v-row>
             <v-text-field :value="total" prefix="Total:  " readonly outlined />
           </v-col>
         </v-row>
