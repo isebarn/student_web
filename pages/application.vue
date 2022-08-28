@@ -10,11 +10,11 @@
       <v-tabs-slider />
 
       <v-tab>
-        Profile
+        General
         <v-icon>mdi-badge-account-outline</v-icon>
       </v-tab>
       <v-tab :disabled="!id">
-        Personal Data
+        Student Profile
         <v-icon>mdi-account-details-outline</v-icon>
       </v-tab>
       <v-tab :disabled="!id">

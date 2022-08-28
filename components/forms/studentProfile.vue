@@ -1,20 +1,32 @@
 <template>
   <v-form :readonly="submitted && student">
     <v-row>
-      <v-col>
+      <v-col cols="4">
         <v-text-field v-model="first_name" label="First Name" />
       </v-col>
-      <v-col>
+      <v-col cols="4">
         <v-text-field v-model="last_name" label="Last Name" />
       </v-col>
-      <v-col>
-        <v-text-field v-model="gender" label="Gender" />
+      <v-col cols="3">
+        <v-radio-group v-model="gender" label="Gender" row>
+          <v-radio label="Male" value="Male" />
+          <v-radio label="Female" value="Female" />
+        </v-radio-group>
+      </v-col>
+      <v-col cols="1">
+        <v-text-field
+          v-model="age_on_arrival"
+          label="Age in arrival"
+          maxlength="3"
+          type="number"
+          max="999"
+          min="1"
+          counter="3"
+          oninput="if(Number(this.value) > Number(this.max)) this.value = this.max;"
+        />
       </v-col>
     </v-row>
     <v-row>
-      <v-col>
-        <v-text-field v-model="age_on_arrival" label="Age in arrival" />
-      </v-col>
       <v-col>
         <v-text-field v-model="length_of_stay" label="Length of stay" />
       </v-col>
