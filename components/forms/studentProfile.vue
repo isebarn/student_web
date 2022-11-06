@@ -193,49 +193,74 @@
         <v-text-field v-if="!environMedicalIssues" v-model="what_family_school_medical_issues" label="If yes, what?" />
       </v-col>
     </v-row>
-    <v-row>
+    <v-row class="pa-0 ma-0">
       <v-checkbox
         v-model="agreement_study"
+        class="pa-0 ma-0"
         label="I understand and agree that I have to study seriously and take any exams for which the school enters me"
       />
+    </v-row>
 
+    <v-row class="pa-0 ma-0">
       <v-checkbox
         v-model="agreement_rural"
+        class="pa-0 ma-0"
         label="I understand and agree that I may be placed in a rural or urban home and take a bus to school"
       />
+    </v-row>
 
+    <v-row class="pa-0 ma-0">
       <v-checkbox
         v-model="agreement_another_student"
+        class="pa-0 ma-0"
         label="I understand and agree that I may be placed with another student in the home"
       />
+    </v-row>
 
+    <v-row class="pa-0 ma-0">
       <v-checkbox
         v-model="agreement_contact_school"
+        class="pa-0 ma-0"
         label="I understand and agree that it is not permitted to contact the school directly prior to arrival until I am told do do so"
       />
+    </v-row>
 
+    <v-row class="pa-0 ma-0">
       <v-checkbox
         v-model="agreement_cannot_change_family"
+        class="pa-0 ma-0"
         label="I understand and agree that I cannot change the Host Family without a valid reason"
       />
+    </v-row>
 
+    <v-row class="pa-0 ma-0">
       <v-checkbox
         v-model="agreement_change_family_region"
+        class="pa-0 ma-0"
         label="I understand and agree that a change of Host Family may mean a change of region"
       />
+    </v-row>
 
+    <v-row class="pa-0 ma-0">
       <v-checkbox
         v-model="agreement_town_of_placement"
+        class="pa-0 ma-0"
         label="I understand and agree that I may not leave my town of placement without completing a Travel Release Form and must accept a travel refusal if my plans are considered unsuitable or unsafe"
       />
+    </v-row>
 
+    <v-row class="pa-0 ma-0">
       <v-checkbox
         v-model="agreement_borrow_lend_money"
+        class="pa-0 ma-0"
         label="I understand that I shall not borrow or lend money to any person during my programme"
       />
+    </v-row>
 
+    <v-row class="pa-0 ma-0">
       <v-checkbox
         v-model="agreement_unauthorized_visits"
+        class="pa-0 ma-0"
         label="I understand that unauthorised visits from friends or relatives may cause the programme to be terminated"
       />
     </v-row>
