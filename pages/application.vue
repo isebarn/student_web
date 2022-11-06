@@ -35,6 +35,10 @@
           Airport
           <v-icon>mdi-airport</v-icon>
         </v-tab>
+        <v-tab :disabled="!id">
+          Email
+          <v-icon>mdi-email</v-icon>
+        </v-tab>
       </v-tabs>
       <v-tabs-items v-model="tab">
         <v-tab-item>
@@ -77,6 +81,43 @@
         </v-tab-item>
         <v-tab-item v-if="id">
           <hostAirport />
+        </v-tab-item>
+        <v-tab-item v-if="id">
+          <v-row>
+            <v-col>
+              <v-btn @click="email('generate_thank_you_letter')">
+                thank_you_letter
+              </v-btn>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-btn @click="email('generate_acceptance_letter_and_contract')">
+                acceptance_letter_and_contract
+              </v-btn>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-btn @click="email('generate_invoice')">
+                invoice
+              </v-btn>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-btn @click="email('generate_invitation')">
+                invitation
+              </v-btn>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-btn @click="email('generate_placement')">
+                placement
+              </v-btn>
+            </v-col>
+          </v-row>
         </v-tab-item>
       </v-tabs-items>
     </v-container>
@@ -139,6 +180,12 @@ export default {
     scheduleInterview () {
       this.setInterview(this.interviewModel)
       this.save()
+    },
+
+    email (method) {
+      this.$axios.$get(`pdf/${this.$route.query.id}?method=${method}`, { responseType: 'blob' }).then((response) => {
+        window.open(URL.createObjectURL(response))
+      })
     },
 
     getInterviewDefaultDate () {

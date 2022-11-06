@@ -48,11 +48,11 @@
     </v-row>
     <v-row v-if="!submitted">
       <v-col>
-        <v-btn @click="update">
+        <!--         <v-btn @click="update">
           Save changes
-        </v-btn>
-        <v-btn @click="dialog = true">
-          Submit for reviews
+        </v-btn> -->
+        <v-btn block text @click="dialog = true">
+          Submit for review
         </v-btn>
       </v-col>
     </v-row>
@@ -85,7 +85,7 @@ export default {
   },
 
   async fetch () {
-    await this.load({ key: 'email', value: this.$auth.user.attributes.email })
+    // await this.load({ key: 'email', value: this.$auth.user.attributes.email })
   },
 
   computed: {

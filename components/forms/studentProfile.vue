@@ -1,5 +1,10 @@
 <template>
-  <v-form :readonly="submitted && student">
+  <v-form :readonly="submitted && student && !$auth.state.loggedIn">
+    <v-row v-if="$auth.state.loggedIn">
+      <v-col>
+        <program />
+      </v-col>
+    </v-row>
     <v-row>
       <v-col>
         <v-text-field v-model="first_name" label="First Name" />
@@ -9,6 +14,9 @@
       </v-col>
       <v-col>
         <v-text-field v-model="gender" label="Gender" />
+      </v-col>
+      <v-col>
+        <v-text-field v-model="email" label="Email" />
       </v-col>
     </v-row>
     <v-row>
@@ -54,7 +62,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-textarea v-model="description" outlined label="What are you hobbies and interests" maxlength="120" />
+        <v-textarea v-model="hobbies_interests" outlined label="What are you hobbies and interests" maxlength="120" />
       </v-col>
     </v-row>
     <v-row>
@@ -290,8 +298,12 @@
 
 import { mapFields } from 'vuex-map-fields'
 import { mapActions } from 'vuex'
+import program from '../program'
+
 export default {
   name: 'StudentProfile',
+  components: { program },
+
   props: {
     student: {
       type: Boolean,

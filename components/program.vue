@@ -1,5 +1,5 @@
 <template>
-  <v-autocomplete v-model="program" :filter="onFilter" :items="programs" label="Program">
+  <v-autocomplete v-model="program" :filter="onFilter" :items="programs" label="Program" @change="save">
     <template #selection="{item}">
       {{ item.code }} - {{ item.description }} - € {{ item.price }} - {{ item.country }}
     </template>
@@ -24,6 +24,7 @@
 <script>
 import { mapFields } from 'vuex-map-fields'
 import { mapActions } from 'vuex'
+
 export default {
   name: 'ProgramAutocomplete',
 
@@ -37,6 +38,7 @@ export default {
 
   methods: {
     ...mapActions('program', ['populate']),
+    ...mapActions('studentProfile', ['save']),
 
     onFilter (item, queryText, itemText) {
       return item.country.toLocaleLowerCase().includes(queryText.toLocaleLowerCase()) || item.description.toLocaleLowerCase().includes(queryText.toLocaleLowerCase()) || item.code.toLocaleLowerCase().includes(queryText.toLocaleLowerCase())

@@ -77,14 +77,12 @@ export const actions = {
     if (state.data.id) {
       data = await this.$axios.$patch('api/student_profile', {
         ...state.data,
-        program: rootState.program.program,
-        email: rootState.auth.user.attributes.email
+        program: rootState.program.program
       })
     } else {
       data = await this.$axios.$post('api/student_profile', {
         ...state.data,
-        program: rootState.program.program,
-        email: rootState.auth.user.attributes.email
+        program: rootState.program.program
       })
     }
 

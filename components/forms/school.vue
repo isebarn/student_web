@@ -61,8 +61,8 @@ export default {
       'data.host_school.address.city',
       'data.host_school.address.postal_code',
       'data.host_school.address.country',
-      'data.host_school.address.phone',
-      'data.host_school.address.url'
+      'data.host_school.phone',
+      'data.host_school.url'
     ])
   },
 

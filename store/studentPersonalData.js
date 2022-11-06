@@ -146,6 +146,10 @@ export const getters = {
 
   getDateOfBirth (state) {
     return state.data.date_of_birth
+  },
+
+  getDateOfApplication (state) {
+    return state.data.date_of_application
   }
 }
 

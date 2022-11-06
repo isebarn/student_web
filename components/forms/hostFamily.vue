@@ -2,9 +2,6 @@
   <v-form>
     <v-container>
       <v-row>
-        <!--         <v-col>
-          <v-text-field v-model="number" label="Host Family Number" />
-        </v-col> -->
         <v-col>
           <v-text-field v-model="family_name" label="Family Name" maxlength="30" />
         </v-col>
@@ -203,7 +200,8 @@ export default {
       'data.host_family.address.country',
       'data.host_family.distance_from_school',
       'data.host_family.smoking',
-      'data.host_family.hobbies_activities'
+      'data.host_family.hobbies_activities',
+      'data.host_family.bank_details'
     ]),
 
     ...mapFields('studentPersonalData', {
